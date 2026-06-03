@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: mart_campaign_performance
+    description: "KPIs de visitas por campana para consumo de negocio."
+    columns:
+      - name: campaign_id
+        description: "Clave de campana (1 fila por campana)."
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+  - name: mart_visit_responses
+    description: "Tabla plana visita + respuesta para analisis BI."
+    columns:
+      - name: answer_id
+        description: "Clave unica de respuesta."
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_responses')
+                field: answer_id
+
+      - name: visit_id
+        description: "Clave de visita asociada a la respuesta."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_visits')
+                field: visit_id
+
+      - name: question_id
+        description: "Clave de pregunta asociada a la respuesta."
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_questions')
+                field: question_id

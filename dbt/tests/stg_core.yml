@@ -1,0 +1,172 @@
+version: 2
+
+models:
+  - name: stg_pos
+    description: "Puntos de venta limpios: estandarizacion de tipos, fechas y campos geograficos para el modelo dimensional."
+    columns:
+      - name: intervention_point_id
+        description: "Clave primaria de punto de venta"
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_clients
+    description: "Clientes estandarizados con control de unicidad por client_id."
+    columns:
+      - name: client_id
+        description: "Clave primaria de cliente"
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_projects
+    description: "Proyectos limpios con imputacion de project_code y validacion de relacion con clientes."
+    columns:
+      - name: project_id
+        description: "Clave primaria de proyecto"
+        tests:
+          - not_null
+          - unique
+      - name: client_id
+        description: "Clave foranea hacia clientes"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_clients')
+                field: client_id
+
+  - name: stg_campaigns
+    description: "Campanas estandarizadas con fechas operativas y deduplicacion por campaign_id."
+    columns:
+      - name: campaign_id
+        description: "Clave primaria de campana"
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_questions
+    description: "Preguntas estandarizadas y vinculadas a campanas."
+    columns:
+      - name: question_id
+        description: "Clave primaria de pregunta"
+        tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Clave foranea hacia campanas"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+  - name: stg_workers
+    description: "Trabajadores limpios con deduplicacion por employee_id y estandarizacion de atributos laborales."
+    columns:
+      - name: employee_id
+        description: "Clave primaria de trabajador"
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_routes
+    description: "Rutas estandarizadas con control de relacion a campanas."
+    columns:
+      - name: route_id
+        description: "Clave primaria de ruta"
+        tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Clave foranea hacia campanas"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+  - name: stg_route_employee
+    description: "Tabla puente de asignacion empleado-ruta con validaciones de integridad."
+    columns:
+      - name: route_employee_id
+        description: "Clave primaria de la asignacion"
+        tests:
+          - not_null
+          - unique
+      - name: route_id
+        description: "Clave foranea hacia rutas"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_routes')
+                field: route_id
+      - name: employee_id
+        description: "Clave foranea hacia trabajadores"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_workers')
+                field: employee_id
+
+  - name: stg_visits
+    description: "Visitas limpias con control de integridad hacia campanas, rutas y puntos de venta."
+    columns:
+      - name: visit_id
+        description: "Clave primaria de visita"
+        tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        description: "Clave foranea hacia campanas"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+      - name: intervention_point_id
+        description: "Clave foranea hacia puntos de venta"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_pos')
+                field: intervention_point_id
+      - name: route_id
+        description: "Clave foranea hacia rutas (puede ser nula en algunos casos)"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_routes')
+                field: route_id
+              config:
+                severity: warn
+
+  - name: stg_responses
+    description: "Respuestas limpias a nivel de answer_id con relaciones a visitas y preguntas."
+    columns:
+      - name: answer_id
+        description: "Clave primaria de respuesta"
+        tests:
+          - not_null
+          - unique
+      - name: visit_id
+        description: "Clave foranea hacia visitas"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_visits')
+                field: visit_id
+      - name: question_id
+        description: "Clave foranea hacia preguntas (puede ser nula en origen)"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_questions')
+                field: question_id

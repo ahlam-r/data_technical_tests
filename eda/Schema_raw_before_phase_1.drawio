@@ -1,0 +1,73 @@
+<mxfile host="65bd71144e">
+    <diagram id="raw-data-erd" name="Raw Data ERD">
+        <mxGraphModel dx="1460" dy="2053" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="clients" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;u&gt;raw_clients&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&lt;/font&gt;PK client_id&lt;br&gt;client_name&lt;br&gt;company_id&lt;br&gt;country&lt;br&gt;sector&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="-220" width="110" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="projects" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;raw_projects&lt;/b&gt;&lt;/u&gt;&lt;br&gt;&lt;/font&gt;PK project_id&lt;br&gt;project_name&lt;br&gt;project_code&lt;br&gt;FK client_id&lt;br&gt;client_code&lt;br&gt;created_at&lt;br&gt;updated_at_sys&lt;br&gt;project_exportable" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="-240" width="150" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="campaigns" value="&lt;u&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;raw_campaigns&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/u&gt;PK campaign_id&lt;br&gt;campaign_code&lt;br&gt;campaign_name&lt;br&gt;FK project_id&lt;br&gt;project_code&lt;br&gt;client_code&lt;br&gt;campaign_start_date&lt;br&gt;campaign_end_date&lt;br&gt;is_active&lt;br&gt;campaign_state_id&lt;br&gt;campaign_state&lt;br&gt;total_visits_planned&lt;br&gt;total_pos_planned&lt;br&gt;visit_duration_minutes&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="-300" width="170" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="questions" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;u&gt;raw_questions&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&lt;/font&gt;&lt;b&gt;PK question_id&lt;br&gt;FK campaign_id&lt;/b&gt;&lt;br&gt;campaign_code&lt;br&gt;question_code&lt;br&gt;question_name&lt;br&gt;question_type&lt;br&gt;question_category&lt;br&gt;question_order&lt;br&gt;question_is_highlighted&lt;br&gt;image_associated&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="-350" width="170" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="routes" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;u&gt;raw_routes&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&lt;/font&gt;PK route_id&lt;br&gt;route_code&lt;br&gt;route_name&lt;br&gt;FK campaign_id&lt;br&gt;campaign_code&lt;br&gt;route_start_date&lt;br&gt;route_end_date&lt;br&gt;route_status&lt;br&gt;delegation_code&lt;br&gt;recall_mail_sent&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="870" y="85" width="180" height="245" as="geometry"/>
+                </mxCell>
+                <mxCell id="workers" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;&lt;u&gt;raw_workers&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&lt;/font&gt;PK employee_id&lt;br&gt;employee_first_name&lt;br&gt;employee_active_status&lt;br&gt;employee_hire_date&lt;br&gt;employee_address_province&lt;br&gt;employee_contract_type&lt;br&gt;company_id&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="390" width="140" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="route_employee" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;raw_route_employee&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;&lt;br&gt;PK route_employee_id&lt;br&gt;FK route_id&lt;br&gt;FK employee_id&lt;br&gt;main_employee&lt;br&gt;ip_percentage&lt;br&gt;created_at&lt;br&gt;updated_at&lt;br&gt;deleted_at" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="890" y="390" width="140" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="pos" value="&lt;u&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;raw_pos&lt;/font&gt;&lt;br&gt;&lt;/b&gt;&lt;/u&gt;&lt;b&gt;PK intervention_point_id&lt;br&gt;&lt;/b&gt;intervention_point_code&lt;br&gt;intervention_point_name&lt;br&gt;intervention_point_address&lt;br&gt;intervention_point_province&lt;br&gt;intervention_point_locality&lt;br&gt;intervention_point_postal_code&lt;br&gt;intervention_point_latitude&lt;br&gt;intervention_point_longitude&lt;br&gt;intervention_point_is_active&lt;br&gt;created_at&lt;br&gt;updated_at" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="80" width="170" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="visits" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;raw_visits&lt;/font&gt;&lt;br&gt;&lt;/u&gt;&lt;/b&gt;PK visit_id&lt;br&gt;FK campaign_id&lt;br&gt;campaign_code&lt;br&gt;project_code&lt;br&gt;FK intervention_point_id&lt;br&gt;intervention_point_code&lt;br&gt;FK route_id&lt;br&gt;route_code&lt;br&gt;visit_date&lt;br&gt;visit_time&lt;br&gt;visit_status&lt;br&gt;visit_type&lt;br&gt;is_client_billable&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="540" y="60" width="220" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="responses" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;raw_responses&lt;/font&gt;&lt;br&gt;&lt;/u&gt;PK answer_id&lt;br&gt;FK visit_id&lt;br&gt;FK question_id&lt;/b&gt;&lt;br&gt;campaign_code&lt;br&gt;intervention_point_code&lt;br&gt;question_type&lt;br&gt;answer&lt;br&gt;expected_answer&lt;br&gt;created_at&lt;br&gt;updated_at_sys" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="1070" y="-340" width="150" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" value="1:N client_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="clients" target="projects" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" value="1:N project_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="projects" target="campaigns" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" value="1:N campaign_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="campaigns" target="questions" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" value="1:N campaign_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="campaigns" target="routes" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" value="1:N campaign_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="campaigns" target="visits" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" value="1:N route_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="routes" target="route_employee" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" value="1:N employee_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="workers" target="route_employee" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" value="1:N route_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="routes" target="visits" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9" value="1:N intervention_point_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="pos" target="visits" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e10" value="1:N visit_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="visits" target="responses" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e11" value="1:N question_id" style="endArrow=block;html=1;rounded=0;strokeWidth=1;" parent="1" source="questions" target="responses" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

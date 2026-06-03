@@ -1,0 +1,8 @@
+dbt_proyecto: # Debe coincidir con el name en tu dbt_project.yml
+  outputs:
+    dev:
+      type: duckdb
+      path: 'prod.duckdb' # Esto creará un archivo de base de datos local aquí mismo
+      extensions:
+        - httpfs # Por si en el futuro lees archivos remotos
+  target: dev
