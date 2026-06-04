@@ -176,10 +176,5 @@ El dashboard de Power BI está diseñado en dos páginas separadas por rol de us
 - Revisar en profundidad el origen de las incidencias de `code` y `state` para evitar reglas ad-hoc en el futuro.
 - Mejorar algunas tablas con más tiempo para auditar de dónde vienen los valores inconsistentes y definir reglas de imputación más robustas.
 - Hacer un dashboard más visual y de mayor calidad; el actual es funcional pero muy simple y limitado por el tiempo disponible.
-- Intentar completar `route_id` en la tabla `stg_visits` solo cuando una campana tenga una unica ruta; si la campana tiene varias rutas, dejar `route_id` vacio para no inventar datos.
 
-## 6. Preguntas abiertas para negocio
 
-1. Visitas sin ruta: se incluyen en KPI o se muestran aparte?
-2. Valores faltantes: se dejan como `null` o se muestran como "Desconocido"?
-3. Qué significa exactamente "campaña exitosa" para dirección?
